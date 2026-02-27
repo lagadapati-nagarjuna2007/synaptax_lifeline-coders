@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VitalSense - Sign Up</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#258a9e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+      </svg>
+      <span>VitalSense Care</span>
+    </div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Services</a>
+      <a href="#">About Us</a>
+      <a href="#">Resources</a>
+    </div>
+    <a href="./index.html"><button class="nav-login-btn">Log In</button></a>
+  </nav>
+
+  <main class="container">
+    <div class="card">
+      
+      <div class="left-panel">
+        <h1>Welcome to<br>VitalSense Care!</h1>
+        <div class="illustration-placeholder">
+          <img src="./ai.jpg" alt="Doctor and patient shaking hands" class="illustration-image">
+        </div>
+        <p>Start your wellness journey today.<br>Create your secure account.</p>
+      </div>
+
+      <div class="right-panel">
+        <h2>Sign Up</h2>
+        
+        <form id="signupForm" novalidate>
+          
+          <div class="input-group">
+            <label>Full Name </label>   </required>
+            <div class="input-wrapper">
+              <svg class="icon-left" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              <input type="text" id="fullName" required autocomplete="off">
+            </div>
+            <div class="error-msg" id="name-error">
+              <i class='bx bx-error-circle'></i> <span>Please fill out this field.</span>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label>Email Address </label>
+            <div class="input-wrapper">
+              <svg class="icon-left" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <input type="email" id="email" required autocomplete="off">
+            </div>
+            <div class="error-msg" id="email-error">
+              <i class='bx bx-error-circle'></i> <span>Please fill out this field.</span>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label>Password</label>
+            <div class="input-wrapper">
+              <input type="password" id="password" class="pwd-input" required>
+              <button type="button" class="toggle-password">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+              </button>
+            </div>
+            <div class="error-msg" id="pwd-error">
+              <i class='bx bx-error-circle'></i> <span>Please fill out this field.</span>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label>Confirm Password</label>
+            <div class="input-wrapper">
+              <input type="password" id="confirmPassword" class="pwd-input" required>
+              <button type="button" class="toggle-password">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+              </button>
+            </div>
+            <div class="error-msg" id="confirm-pwd-error">
+              <i class='bx bx-error-circle'></i> <span>Please fill out this field.</span>
+            </div>
+          </div>
+
+          <a href="./index.html"><button type="submit" class="submit-btn">Create My Account</button></a>
+          
+          <p class="login-link">Already have an account? <a href="./index.html">Log In</a></p>
+        </form>
+      </div>  
+    </div>
+  </main>
+
+  <div id="loaderModal" class="modal-overlay hidden">
+    <div class="loader-card">
+      <p class="loader-title">Securing your connection...</p>
+      
+      <div class="heartbeat-loader">
+        <svg class="pulse-ring" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="45" fill="none" stroke="#258a9e" stroke-width="4" stroke-dasharray="200" stroke-dashoffset="50"></circle>
+        </svg>
+        <svg class="pulse-line" viewBox="0 0 24 24" fill="none" stroke="#258a9e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+        </svg>
+        <div class="heart-icon"></div>
+      </div>
+
+      <p class="loader-subtitle">VERIFYING DETAILS...</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

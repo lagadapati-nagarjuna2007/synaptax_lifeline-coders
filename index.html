@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VitalSense Care Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  
+  <style>
+    /* ----- GLOBAL RESET & VARIABLES ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    :root {
+      --primary: #258a9e;
+      --primary-hover: #1e6d7d;
+      --bg-color: #eaf6f7;
+      --text-dark: #1a202c;
+      --text-light: #718096;
+      --border: #e2e8f0;
+      --panel-bg: rgba(242, 251, 251, 0.85); 
+      --error: #ef4444; /* Custom Red for Errors */
+      --glass-border: rgba(226, 232, 240, 0.8);
+      --glass-shadow: 0 16px 40px rgba(37, 138, 158, 0.12);
+      --border-radius: 24px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-color);
+      padding: 20px;
+      color: var(--text-dark);
+    }
+
+    /* ----- CARD & GLASSMORPHISM ----- */
+    .login-card {
+      width: 100%;
+      max-width: 440px;
+      background: var(--panel-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--border-radius);
+      padding: 48px 40px;
+      box-shadow: var(--glass-shadow);
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ----- HEADER & LOGO ----- */
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 32px;
+    }
+    .logo svg {
+      color: var(--primary);
+    }
+
+    .header-text {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .header-text h2 {
+      font-size: 26px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .header-text p {
+      color: var(--text-light);
+      font-size: 14px;
+    }
+
+    /* ----- FORM INPUTS & FLOATING LABELS ----- */
+    .input-wrapper {
+      margin-bottom: 24px; /* Increased to make room for error text */
+    }
+
+    .input-group {
+      position: relative;
+    }
+
+    .input-group i.left-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-light);
+      font-size: 20px;
+      transition: var(--transition);
+      z-index: 10;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 22px 16px 10px 48px;
+      border: 2px solid transparent;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.9);
+      font-size: 15px;
+      color: var(--text-dark);
+      outline: none;
+      transition: var(--transition);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .input-group input:focus {
+      background: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(37, 138, 158, 0.15);
+    }
+
+    .input-group input:focus + i.left-icon,
+    .input-group input:not(:placeholder-shown) + i.left-icon {
+      color: var(--primary);
+    }
+
+    .input-group label {
+      position: absolute;
+      left: 48px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 15px;
+      color: var(--text-light);
+      pointer-events: none;
+      transition: var(--transition);
+    }
+
+    /* Floating action */
+    .input-group input:focus ~ label,
+    .input-group input:not(:placeholder-shown) ~ label {
+      top: 14px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--primary);
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-light);
+      font-size: 20px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .toggle-password:hover {
+      color: var(--text-dark);
+    }
+
+    /* ----- CUSTOM ERROR STYLES ----- */
+    .error-msg {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--error);
+      font-size: 12px;
+      font-weight: 500;
+      margin-top: 6px;
+      margin-left: 8px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-5px);
+      transition: var(--transition);
+    }
+
+    .error-msg i {
+      font-size: 14px;
+    }
+
+    .error-msg.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    /* Error state for inputs */
+    .input-group input.has-error {
+      border-color: var(--error);
+      box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15);
+    }
+    .input-group input.has-error + i.left-icon {
+      color: var(--error);
+    }
+    .input-group input.has-error ~ label {
+      color: var(--error);
+    }
+
+    /* ----- OPTIONS: REMEMBER & FORGOT ----- */
+    .form-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+      font-size: 13px;
+    }
+
+    .remember {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-light);
+      cursor: pointer;
+    }
+    
+    .remember input {
+      accent-color: var(--primary);
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    .forgot {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+    .forgot:hover {
+      text-decoration: underline;
+      color: var(--primary-hover);
+    }
+
+    /* ----- PRIMARY BUTTON & SPINNER ----- */
+    .btn-primary {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 16px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 8px 20px rgba(37, 138, 158, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .spinner {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .btn-primary.loading .btn-text {
+      display: none;
+    }
+    .btn-primary.loading .spinner {
+      display: block;
+    }
+
+    /* ----- SIGN UP TEXT ----- */
+    .signup-text {
+      text-align: center;
+      font-size: 14px;
+      color: var(--text-light);
+    }
+    .signup-text a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    .signup-text a:hover {
+      text-decoration: underline;
+      color: var(--primary-hover);
+    }
+
+    /* ----- MOBILE RESPONSIVENESS ----- */
+    @media (max-width: 480px) {
+      .login-card {
+        padding: 40px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-card">
+    <div class="logo">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#258a9e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+      </svg> VitalSense Care
+    </div>
+
+    <div class="header-text">
+      <h2>Welcome Back 👋</h2>
+      <p>Login to continue</p>
+    </div>
+
+    <form id="login-form" novalidate>
+      
+      <div class="input-wrapper">
+        <div class="input-group">
+          <input type="email" id="email" placeholder=" " autocomplete="off">
+          <i class='bx bx-envelope left-icon'></i>
+          <label for="email">Email address</label>
+        </div>
+        <div class="error-msg" id="email-error">
+          <i class='bx bx-error-circle'></i> <span>Please fill out this field.</span>
+        </div>
+      </div>
+
+      <div class="input-wrapper">
+        <div class="input-group">
+          <input type="password" id="password" placeholder=" ">
+          <i class='bx bx-lock-alt left-icon'></i>
+          <label for="password">Password</label>
+          <i class='bx bx-hide toggle-password' id="toggle-pwd"></i>
+        </div>
+        <div class="error-msg" id="pwd-error">
+          <i class='bx bx-error-circle'></i> <span>Please fill out this field.</span>
+        </div>
+      </div>
+
+      <div class="form-options">
+        <label class="remember">
+          <input type="checkbox" id="remember">
+          Remember me
+        </label>
+        <a href="#" class="forgot">Forgot Password?</a>
+      </div>
+      <div id="login-error" style="color: #ef4444; font-size: 13px; text-align: center; margin-bottom: 15px; display: none;">
+  Invalid email or password. Please try again.
+</div>
+      <button type="submit" class="btn-primary" id="login-btn">
+        <span class="btn-text">Login</span>
+        <div class="spinner"></div>
+      </button>
+    </form>
+
+    <p class="signup-text">
+      Don't have an account? <a href="./signin.html">Sign Up</a>
+    </p>
+  </div>
+
+ <script>
+    // Toggle Password Visibility
+    const togglePwd = document.getElementById('toggle-pwd');
+    const passwordInput = document.getElementById('password');
+
+    togglePwd.addEventListener('click', () => {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      
+      togglePwd.classList.toggle('bx-hide');
+      togglePwd.classList.toggle('bx-show');
+    });
+
+    // Handle Form Submit & LocalStorage Check
+    const loginForm = document.getElementById('login-form');
+    const loginBtn = document.getElementById('login-btn');
+    const emailInput = document.getElementById('email');
+    const loginError = document.getElementById('login-error'); // The new error message div
+
+    // Hide error when user starts typing again
+    emailInput.addEventListener('input', () => loginError.style.display = 'none');
+    passwordInput.addEventListener('input', () => loginError.style.display = 'none');
+
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault(); // Stop default form submission
+      
+      // Get the values the user just typed into the login form
+      const enteredEmail = emailInput.value.trim();
+      const enteredPassword = passwordInput.value.trim();
+
+      // Retrieve the saved values from the Sign Up page
+      const savedEmail = localStorage.getItem('registeredEmail');
+      const savedPassword = localStorage.getItem('registeredPassword');
+
+      // Add loading state to button
+      loginBtn.classList.add('loading');
+      loginBtn.disabled = true;
+      loginError.style.display = 'none'; // Hide previous errors
+
+      setTimeout(() => {
+        loginBtn.classList.remove('loading');
+        loginBtn.disabled = false;
+
+        // CHECK VERIFICATION: Do the entered details match the saved details?
+        if (enteredEmail === savedEmail && enteredPassword === savedPassword) {
+          // Success! They matched.
+          alert("Login Successful! Welcome to VitalSense Care.");
+          // Here you would redirect them to the main dashboard:
+          // window.location.href = './dashboard.html'; 
+        } else {
+          // Failed! They didn't match (or no account exists).
+          loginError.style.display = 'block'; // Show the invalid error
+        }
+      }, 1500); // 1.5 second loading delay for realism
+    });
+  </script>
+
+</body>
+</html>
