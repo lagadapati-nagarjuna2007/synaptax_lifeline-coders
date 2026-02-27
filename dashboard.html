@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VitalCare Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="./dashstyle.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#258a9e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+      </svg>
+
+                <span>VitalCare</span>
+            </div>
+            
+            <button class="emergency-btn">
+                <i class='bx bx-microphone'></i> Emergency help
+            </button>
+
+            <ul class="nav-links">
+                <li class="active">
+                    <a href="#"><i class='bx bx-desktop'></i> Dashboard <i class='bx bx-chevron-down arrow'></i></a>
+                </li>
+                <li><a href="#"><i class='bx bx-calendar'></i>Chat interface</a></li>
+                <li><a href="#"><i class='bx bx-user'></i>Suggestions</a></li>
+                <li><a href="#"><i class='bx bx-pulse'></i> Alerts</a></li>
+                <li><a href="#"><i class='bx bx-layer'></i> Feedback</a></li>
+            </ul>
+
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <i class='bx bx-menu menu-btn'></i>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search...">
+                    <i class='bx bx-search'></i>
+                </div>
+                <div class="topbar-actions">
+                    <i class='bx bx-fullscreen'></i>
+                    <i class='bx bx-bell'></i>
+                    <i class='bx bx-cog'></i>
+                    <div class="user-profile">
+    <div class="user-info">
+        <span id="userNameDisplay">Loading...</span> 
+        <small>PATIENT</small>
+    </div>
+    <div class="avatar">
+        <i class='bx bx-user-circle'></i>
+    </div>
+</div>
+                </div>
+            </header>
+
+            <div class="dashboard-grid">
+    
+    <div class="stat-card">
+        <div class="stat-icon bg-blue"><i class='bx bx-brain'></i></div>
+        <p>Stress Score</p>
+        <h3>--</h3>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon bg-cyan"><i class='bx bx-battery-charging'></i></div>
+        <p>Recovery Score</p>
+        <h3>--</h3>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon bg-yellow"><i class='bx bx-pulse'></i></div>
+        <p>Cardiovascular Risk</p>
+        <h3>-- <span style="font-size: 13px; color: #f59e0b; font-weight: 500;">(NULL)</span></h3>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon bg-pink"><i class='bx bx-error-alt'></i></div>
+        <p>Overall Risk Level</p>
+        <h3 style="color: #ef4444;">NULL</h3>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon bg-pink"><i class='bx bx-error-alt'></i></div>
+        <p>Steps</p>
+        <h3 style="color: #ef4444;">--</h3>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon bg-pink"><i class='bx bx-error-alt'></i></div>
+        <p>SPO<sub>2</sub></p>
+        <h3 style="color: #ef4444;">--</h3>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon bg-pink"><i class='bx bx-error-alt'></i></div>
+        <p>Workout Duration</p>
+        <h3 style="color: #ef4444;">--</h3>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon bg-pink"><i class='bx bx-error-alt'></i></div>
+        <p>Calorie Burn</p>
+        <h3 style="color: #ef4444;">--</h3>
+    </div>
+                <div class="chart-card span-2" style="width: 205%;">
+    <h4>Overall health score statistics</h4>
+    <h2 class="revenue-val"> <small> Year - 2026</small></h2>
+    
+    <div style="position: relative; height: 257px; width: 1000px;">
+        <canvas id="revenueChart"></canvas>
+    </div>
+</main>
+    </div>
+
+    <script src="./dashscript.js"></script>
+</body>
+</html>

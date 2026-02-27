@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VitalSense Care</title>
+    <link rel="stylesheet" href="./infostyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="mesh-bg"></div>
+
+    <main class="dashboard-container">
+        <div class="image-showcase" id="customImageContainer">
+            <div class="image-placeholder-content">
+                <i data-lucide="image" class="placeholder-icon"></i>
+                <span>Image Showcase</span>
+            </div>
+        </div>
+        
+        <div class="interactive-panel glass-panel">
+            <header class="panel-header">
+                <h2>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#258a9e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:middle; margin-right:8px;">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                    </svg>
+                    VitalSense Care
+                </h2>
+                <p>Enter your vitals for AI-driven analysis</p>
+            </header>
+
+            <form id="interactiveForm" class="vitals-form">
+                <div class="input-row">
+                    <div class="floating-input">
+                        <input type="text" id="name" required placeholder=" ">
+                        <label>Full Name</label>
+                    </div>
+                    <div class="floating-input">
+                        <input type="number" id="age" required placeholder=" ">
+                        <label>Age</label>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <label class="section-label">Biological Sex</label>
+                    <div class="selection-group" id="genderSelect">
+                        <div class="select-card" data-value="Male">Male</div>
+                        <div class="select-card" data-value="Female">Female</div>
+                        <div class="select-card" data-value="Other">Other</div>
+                    </div>
+                </div>
+
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <label>Height</label>
+                        <span id="heightValue" class="dynamic-value">170 cm</span>
+                    </div>
+                    <input type="range" id="heightSlider" min="100" max="250" value="170" class="styled-slider">
+                </div>
+
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <label>Weight</label>
+                        <span id="weightValue" class="dynamic-value">70 kg</span>
+                    </div>
+                    <input type="range" id="weightSlider" min="30" max="200" value="70" class="styled-slider">
+                </div>
+
+                <div class="form-section">
+                    <label class="section-label">Lifestyle Habits</label>
+                    <div class="toggle-grid">
+                        <label class="interactive-toggle">
+                            <input type="checkbox" id="smoking">
+                            <div class="toggle-btn"><i data-lucide="cigarette"></i> Smoking</div>
+                        </label>
+                        <label class="interactive-toggle">
+                            <input type="checkbox" id="alcohol">
+                            <div class="toggle-btn"><i data-lucide="wine"></i> Alcohol</div>
+                        </label>
+                        <label class="interactive-toggle">
+                            <input type="checkbox" id="exercise">
+                            <div class="toggle-btn"><i data-lucide="activity"></i> Active Exercise</div>
+                        </label>
+                    </div>
+                    <br>
+                    <div class="floating-input">
+                        <textarea id="medicalHistory" placeholder=" " rows="3"></textarea>
+                        <label>Existing Medical History</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="ai-submit-btn" id="analyzeBtn">
+                    <i data-lucide="cpu"></i> Run Neural Analysis
+                </button>
+            </form>
+
+            <div id="resultsOverlay" class="results-overlay hidden">
+                <div class="results-content">
+                    <i data-lucide="check-circle" class="success-icon"></i>
+                    <h3>Analysis Complete</h3>
+                    <div class="metric-box">
+                        <span class="metric-label">Calculated BMI</span>
+                        <span class="metric-value" id="finalBmi">--</span>
+                    </div>
+                    <p id="aiSuggestion" class="ai-suggestion-text"></p>
+                    <button type="button" class="reset-btn" id="resetBtn">Recalculate</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="./infoscript.js"></script>
+</body>
+</html>
